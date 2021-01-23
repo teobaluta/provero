@@ -67,7 +67,8 @@ def validate(model):
     # always take same shuffled order
     seed = 1
     nb_test_samples = 1000
-    test_generator = data_generator.flow_from_directory('/home/teodora/imagenet-data/val',
+    val_path = os.path.join(os.environ['DATA_DIR'], 'val')
+    test_generator = data_generator.flow_from_directory(val_path,
                                                         target_size=(224, 224), seed=seed,
                                                         batch_size=32)
 
