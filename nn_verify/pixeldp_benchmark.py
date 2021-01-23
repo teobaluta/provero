@@ -349,32 +349,35 @@ def check_pixeldp(args, batch_size=1):
                 robustness_from_argmax = data['robustness_from_argmax']
                 print('PixelDP robustness_from_argmax = {}'.format(robustness_from_argmax))
                 print('Running provero with img_epsilon = {}'.format(robustness_from_argmax))
-                X = verro.RandomVarRobustness(nn, nn.images[0], preprocess,
-                                              eps=robustness_from_argmax,
-                                              mode='non', distance='l2',
-                                              pixeldp=[nn.images, nn.labels])
+                X = provero.RandomVarRobustness(nn, nn.images[0], preprocess,
+                                                eps=robustness_from_argmax,
+                                                mode='non', distance='l2',
+                                                pixeldp=[nn.images, nn.labels])
 
-                answer = verro.adaptive_assert(args.thresh, args.eta, args.delta,
-                                               X, args.timeout, args.alpha)
+                answer = provero.adaptive_assert(args.thresh, args.eta,
+                                                 args.delta, X, args.timeout,
+                                                 args.alpha)
 
                 print('PixelDP robustness_from_softmax = {}'.format(data['robustness_from_softmax']))
                 robustness_from_argmax = data['robustness_from_softmax']
                 print('PixelDP robustness_from_argmax = {}'.format(robustness_from_softmax))
                 print('Running provero with img_epsilon = {}'.format(robustness_from_softmax))
-                X = verro.RandomVarRobustness(nn, nn.images[0], preprocess,
-                                              eps=robustness_from_softmax,
-                                              mode='non', distance='l2',
-                                              pixeldp=[nn.images, nn.labels])
+                X = provero.RandomVarRobustness(nn, nn.images[0], preprocess,
+                                                eps=robustness_from_softmax,
+                                                mode='non', distance='l2',
+                                                pixeldp=[nn.images, nn.labels])
 
-                answer = verro.adaptive_assert(args.thresh, args.eta, args.delta,
-                                               X, args.timeout, args.alpha)
+                answer = provero.adaptive_assert(args.thresh, args.eta,
+                                                 args.delta, X, args.timeout,
+                                                 args.alpha)
             else:
-                X = verro.RandomVarRobustness(nn, nn.images[0], preprocess,
-                                              eps=args.img_epsilon,
-                                              mode='non', distance='l2',
-                                              pixeldp=[nn.images, nn.labels])
-                answer = verro.adaptive_assert(args.thresh, args.eta, args.delta,
-                                               X, args.timeout, args.alpha)
+                X = provero.RandomVarRobustness(nn, nn.images[0], preprocess,
+                                                eps=args.img_epsilon,
+                                                mode='non', distance='l2',
+                                                pixeldp=[nn.images, nn.labels])
+                answer = provero.adaptive_assert(args.thresh, args.eta,
+                                                 args.delta, X, args.timeout,
+                                                 args.alpha)
 
 
             ans_time = time.time() - start
