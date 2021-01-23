@@ -10,6 +10,23 @@ How to Install
 We recommend you create a Python 3.6.8 (tested with 3.5.2 also) environment and install the requirements with `pip install -r
 requirements.txt`. To set up paths run `. ./install.sh`. You will need to edit this file to your own system's paths.
 
+##### Environment Variables
+
+The `install.sh` sets the following list of paths/environment vairables
+
+- `PROVERO_HOME`: path to the project's root directory
+- `DATA_DIR`: path to directory containing `ImageNet` dataset. For the pretrained models, it will try to load either from the `imagenet_test.pkl`, `imagenet_test_inception.pkl` or by default create the folder `DATASET_DIR` to load the dataset from it. If you have an existing download for the `ImageNet` dataset, change this variable to point to it  
+- `PROVERO_MODELS_PATH`: where to save to/load from pretrained models (as available from `keras.applications` package). By default, this is set to `/tmp/`
+
+##### Other paths (in definitions.py)
+Most of these variables are set with respect to the environment variables.
+- `NB_TEST_SAMPLES`: number of test samples to run `provero` on
+- `LOGS_PATH`: creates and saves logs from running `provero` at this path, by default set to `$PROVERO_HOME/logs`
+- `ERAN_TEST_PATH`: the path to the test set for the ERAN models, by default set to `$PROVERO_HOME/eran_benchmark`
+- `PROVERO_TEST_PATH`: the path to the test set for the pretrained models
+- `PIXELDP_NETS`: the name of the PixelDP model
+- `PRETRAINED_NETS`: list of names of supported pretrained nets 
+
 How to Run
 ----------
 
@@ -78,29 +95,35 @@ Run for 144 samples
 Benchmarks
 ----------
 
-### 1. ERAN Benchmark
+### 1. ERAN Benchmark (BM1)
 
+#### Models
 Neural nets pre-trained and provided by ERAN in `eran_benchmark/nets` (too big to upload on git -- use `eran_benchmark/download_nets.sh` script to dowload the neural nets) are in a specific format `.pyt` or `.tf`.
-
-Test set for ERAN: 100 test images for MNIST and CIFAR10 (in `eran_benchmark/mnist_test.csv` and `eran_data/cifar10_test.csv`).
 
 If `provero` is given a neural network in a `.pyt` or `.tf` format then it will run on the ERAN test set.
 Supported datasets: MNIST and CIFAR10.
 
 In the paper we ran the older ERAN version (commit `08fc8f63d60dce382624cf7e8307b1fe96420574`) that supports Tensorflow 1.11 models. Porting the model loading and parsing to Tensorflow 2.x is for future development work. 
 
+#### Test set
+Test set for ERAN: 100 test images for MNIST and CIFAR10 (in `eran_benchmark/mnist_test.csv` and `eran_data/cifar10_test.csv`). You may run it on other inputs by adding your input in the ERAN test set format. More information is available on the [ERAN](https://github.com/eth-sri/eran) Github repo.
 
-### 2. Pretrained Benchmark
 
-Pre-trained neural nets available in Keras trained on the ImageNet dataset - instead of a file select one of the option `VGG16,VGG19,ResNet18,ResNet50,AlexNet,DenseNet,Inception_v3` for `--netname`.
+### 2.  Larger Models (BM2)
+
+#### Models
+
+Pre-trained neural nets available in Keras trained on the ImageNet dataset. To run `provero` on these, instead of a file select one of the option `VGG16,VGG19,ResNet50,DenseNet,Inception_v3` for `--netname`.
 
 When you first run `provero` for the pre-trained models, these will be downloaded as `.h5` files and saved in `/tmp/<model_name>` folder by default.
-Test set for pretrained: 100 images saved in `provero_benchmark/`.
+
+#### Test Set
+Test set for pretrained: 100 images saved in `provero_benchmark/`. We recommend downloading the `.pkl` files containing the test set used in the evaluation first as `ImageNet` is a large dataset that requires around 150GB.
 
 
 ### 3. PixelDP Model
 
-Randomized ResNet20 neural net on the CIFAR10 dataset (downloaded from paper github).
+Randomized ResNet20 neural net on the CIFAR10 dataset (downloaded from [pixeldp](https://github.com/columbia/pixeldp) repo).
 
 How to Extend
 -------------
