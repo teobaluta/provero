@@ -25,6 +25,56 @@ For example:
 python nn_verify/ --netname /hdd/provero-private/eran_benchmark/nets/pytorch/mnist/convBigRELU__DiffAI.pyt --delta 0.01 --eta 0.01 --thresh 0.1
 ```
 
+Excerpt from the expected output (omitted are Tensorflow messages)
+```
+...
+W shape (3, 3, 1, 32)
+Conv2D {'filters': 32, 'kernel_size': [3, 3], 'input_shape': [28, 28, 1], 'stride': [1, 1], 'padding': 1} W.shape: (3, 3, 1, 32) b.shape: (32,)
+        OutShape:  (1, 28, 28, 32)
+W shape (4, 4, 32, 32)
+Conv2D {'filters': 32, 'kernel_size': [4, 4], 'input_shape': [28, 28, 32], 'stride': [2, 2], 'padding': 1} W.shape: (4, 4, 32, 32) b.shape: (32,)
+        OutShape:  (1, 14, 14, 32)
+W shape (3, 3, 32, 64)
+Conv2D {'filters': 64, 'kernel_size': [3, 3], 'input_shape': [14, 14, 32], 'stride': [1, 1], 'padding': 1} W.shape: (3, 3, 32, 64) b.shape: (64,)
+        OutShape:  (1, 14, 14, 64)
+W shape (4, 4, 64, 64)
+Conv2D {'filters': 64, 'kernel_size': [4, 4], 'input_shape': [14, 14, 64], 'stride': [2, 2], 'padding': 1} W.shape: (4, 4, 64, 64) b.shape: (64,)
+        OutShape:  (1, 7, 7, 64)
+ReLU
+        OutShape:  (1, 512)
+        WShape:  (3136, 512)
+        BShape:  (512,)
+ReLU
+        OutShape:  (1, 512)
+        WShape:  (512, 512)
+        BShape:  (512,)
+Affine
+        OutShape:  (1, 10)
+        WShape:  (512, 10)
+        BShape:  (10,)
+mean=[0.1307],stds=[0.3081]
+...
+RandomVar initialized - correct_label=7; eps=0.1
+Running adaptive_assert!
+Run for 144 samples
+s:0
+Sampling took 0.465954065322876 sec
+img 0 #adversarial < 0.1: Yes 0.4702014923095703 sec
+RandomVar initialized - correct_label=2; eps=0.1
+Running adaptive_assert!
+Run for 144 samples
+s:0
+Sampling took 0.4389660358428955 sec
+img 1 #adversarial < 0.1: Yes 0.44341611862182617 sec
+RandomVar initialized - correct_label=1; eps=0.1
+Running adaptive_assert!
+Run for 144 samples
+
+....
+
+```
+
+
 Benchmarks
 ----------
 
