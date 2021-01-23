@@ -1,7 +1,7 @@
 # PROVERO
 
 PROVERO is a sampling-based tool to quantitatively estimate properties for neural networks with
-probabilistic guarantees.
+probabilistic guarantees.  This work is by Teodora Baluta, Zheng Leong Chua, Kuldeep S. Meel and Prateek Saxena, as published in ICSE 2021. 
 
 
 How to Install
@@ -56,9 +56,11 @@ How to Extend
 -------------
 
 1) What if I have my own models?
+
 You can either convert models to `.pyt` or `.tf` format (as per ERAN tool) or you may add your own model loading or benchmarks. To add your own model loading code, follow the example of `nn_verify/eran_benchmark.py` to create a `nn_verify/<custommodel>_benchmark.py`.
 
 2) Does it work on other properties?
+
 Currently, we instantiate the property to the robustness property but extending it to other properties should not be too hard. For extending it to other properties, you should extend the `RandomVar` class in `nn_verify/provero.py` (see how we extend it for robustness in `RandomVarRobustness`). The only requirement is that the property class should have a `sample` method so that the algorithms in `nn_verify/provero.py`.
 
 
