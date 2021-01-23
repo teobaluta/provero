@@ -18,10 +18,9 @@ import datasets.cifar
 
 logger = logging.getLogger(__name__)
 
-#MODELS_DIR='/home/projects/11000744/teo/pixeldp/trained_models/'
-MODELS_DIR='/hdd/pixeldp/trained_models'
+MODELS_DIR=os.path.join(os.environ['PIXELDP_HOME'], 'trained_models')
 DATASET='cifar10'
-DATA_PATH='/hdd/pixeldp/datasets/'
+DATA_PATH=os.path.join(os.environ['PIXELDP_HOME'], 'datasets')
 
 
 class PixelDPNet(object):
