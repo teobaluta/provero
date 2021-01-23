@@ -18,6 +18,8 @@ The `install.sh` sets the following list of paths/environment vairables
 - `DATA_DIR`: path to directory containing `ImageNet` dataset. For the pretrained models, it will try to load either from the `imagenet_test.pkl`, `imagenet_test_inception.pkl` or by default create the folder `DATASET_DIR` to load the dataset from it. If you have an existing download for the `ImageNet` dataset, change this variable to point to it  
 - `PROVERO_MODELS_PATH`: where to save to/load from pretrained models (as available from `keras.applications` package). By default, this is set to `/tmp/`
 
+It also clones the [pixeldp](https://github.com/columbia/pixeldp) project, if the PixelDP pretrained models do not exist, it downloads them and sets the environment variable to point to the repo.
+
 ##### Other paths (in definitions.py)
 Most of these variables are set with respect to the environment variables.
 - `NB_TEST_SAMPLES`: number of test samples to run `provero` on
@@ -123,7 +125,7 @@ Test set for pretrained: 100 images saved in `provero_benchmark/`. We recommend 
 
 ### 3. PixelDP Model
 
-Randomized ResNet20 neural net on the CIFAR10 dataset (downloaded from [pixeldp](https://github.com/columbia/pixeldp) repo).
+Randomized ResNet20 neural net on the CIFAR10 dataset (downloaded from [pixeldp](https://github.com/columbia/pixeldp) repo during the installation phase).
 
 How to Extend
 -------------
