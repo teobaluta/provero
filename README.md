@@ -44,12 +44,22 @@ In the paper we ran the older ERAN version (commit `08fc8f63d60dce382624cf7e8307
 
 Pre-trained neural nets available in Keras trained on the ImageNet dataset - instead of a file select one of the option `VGG16,VGG19,ResNet18,ResNet50,AlexNet,DenseNet,Inception_v3` for `--netname`.
 
+When you first run `provero` for the pre-trained models, these will be downloaded as `.h5` files and saved in `/tmp/<model_name>` folder by default.
 Test set for pretrained: 100 images saved in `provero_benchmark/`.
 
 
 ### 3. PixelDP Model
 
 Randomized ResNet20 neural net on the CIFAR10 dataset (downloaded from paper github).
+
+How to Extend
+-------------
+
+1) What if I have my own models?
+You can either convert models to `.pyt` or `.tf` format (as per ERAN tool) or you may add your own model loading or benchmarks. To add your own model loading code, follow the example of `nn_verify/eran_benchmark.py` to create a `nn_verify/<custommodel>_benchmark.py`.
+
+2) Does it work on other properties?
+Currently, we instantiate the property to the robustness property but extending it to other properties should not be too hard. For extending it to other properties, you should extend the `RandomVar` class in `nn_verify/provero.py` (see how we extend it for robustness in `RandomVarRobustness`). The only requirement is that the property class should have a `sample` method so that the algorithms in `nn_verify/provero.py`.
 
 
 How to Cite
