@@ -1,7 +1,8 @@
 # PROVERO
 
 PROVERO is a sampling-based tool to quantitatively estimate properties for neural networks with
-probabilistic guarantees.  This work is by Teodora Baluta, Zheng Leong Chua, Kuldeep S. Meel and Prateek Saxena, as published in ICSE 2021. 
+probabilistic guarantees.  This work is by Teodora Baluta, Zheng Leong Chua, Kuldeep S. Meel and
+Prateek Saxena, as published in ICSE 2021. 
 
 
 How to Install
@@ -28,6 +29,20 @@ Most of these variables are set with respect to the environment variables.
 - `PROVERO_TEST_PATH`: the path to the test set for the pretrained models
 - `PIXELDP_NETS`: the name of the PixelDP model
 - `PRETRAINED_NETS`: list of names of supported pretrained nets 
+
+##### Package Requirements
+
+The installation scripts require the `unzip` utility installed on the system.
+
+##### Other Requirements
+
+Please note that in order to run the example below you need to download the pre-trained models.
+The instructions to download the benchmarks are available in [Benchmarks](#benchmarks) section.  The
+BM1 models, together with the test sets require around 6GB of storage and it may take up to 10
+minutes depending on your network connection. Additionally, for the benchmark on randomized networks
+that uses PixelDP, another 1.3GB are required for the CIFAR10 model and datasets. The large
+pre-trained models (BM2) require around 2GB of storage. These models are stored by default in `/tmp/`.
+
 
 How to Run
 ----------
@@ -111,7 +126,7 @@ In the paper we ran the older ERAN version (commit `08fc8f63d60dce382624cf7e8307
 Test set for ERAN: 100 test images for MNIST and CIFAR10 (in `eran_benchmark/mnist_test.csv` and `eran_data/cifar10_test.csv`). You may run it on other inputs by adding your input in the ERAN test set format. More information is available on the [ERAN](https://github.com/eth-sri/eran) Github repo.
 
 
-### 2.  Larger Models (BM2)
+### 2. Larger Models (BM2)
 
 #### Models
 
@@ -143,4 +158,6 @@ How to Cite
 -----------
 If you use PROVERO, please cite our work.
 
-The benchmarks used in our evaluation can be found [here](TODO). More info on the project page, [PROVERO](https://teobaluta.github.io/PROVERO/).
+The benchmarks used in our evaluation can be found
+[here](https://drive.google.com/drive/folders/1KEh-wYC0sQVSwdnyH0Dhix6ktYzVzkBj?usp=sharing). More
+info on the project page, [PROVERO](https://teobaluta.github.io/PROVERO/).
